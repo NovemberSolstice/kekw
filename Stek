@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+
+namespace STEK
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Stack<int> stepen = new Stack<int>();
+            Stack<int> numbers = new Stack<int>();
+            Random rand = new Random();
+            Console.WriteLine("Введите кол-во элементов многочлена:");
+                int f = Convert.ToInt32(Console.ReadLine());
+
+                for (int i = 0; i < f; i++)
+            {
+                stepen.Push(rand.Next(1, 10));
+            }
+            int temp;
+            int [] a = new int[f];
+            for (int g = 0;g < f; g++)
+            {
+                a[g] = stepen.Pop();
+            }
+            for (int i = 0; i < f - 1; i++)
+            {
+                for (int j = i + 1; j < f; j++)
+                {
+                    if (a[i] > a[j])
+                    {
+                        temp = a[i];
+                        a[i] = a[j];
+                        a[j] = temp;
+                    }
+                }
+            }
+
+            for (int i = 0; i < f; i++)
+            {
+                stepen.Push(a[i]);
+            }
+            int[] b = new int[f];
+
+
+            for (int j = 0; j < f; j++)
+            {
+                numbers.Push(rand.Next(1, 10));
+            }
+
+            for (int i = 0; i < f; i++)
+            {
+                b[i] = numbers.Pop();
+            }
+            for (int i = 0; i < f; i++)
+            {
+                numbers.Push(b[i]);
+            }
+
+
+            Console.WriteLine("Изначальный многочлен:");
+            Console.WriteLine();
+
+
+            for (int i = f-1; i >= 0; i--)
+            {
+                if (a[i] == 1)
+                {
+                    Console.Write("X^" + b[i] + "  ");
+                }
+                else
+                {
+                    Console.Write(b[i] + "X^" + a[i]+ " + ");
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("_________________");
+            Console.WriteLine("Производная:");
+
+            for (int i = f-1; i >= 0; i--)
+            {
+                if (a[i]-1 == 0)
+                {
+                    Console.Write(b[i] * a[i] + "X" + "  ");
+                }
+                else
+                {
+                    Console.Write(b[i] * a[i] + "X^" + (a[i] - 1) + " + " );
+                }
+            }
+            Console.ReadLine();
+
+        }
+    }
+}
